@@ -1,0 +1,18 @@
+# 02-config 模块配置文件
+# 培训要求：配置项必须写在配置文件中，不能写在 Java 代码里
+
+# ========== 内置配置（Spring Boot 标准 key） ==========
+server:
+  port: 8888                        # 应用启动端口（培训要求 8888，与 API Fox 环境配置一致）
+  servlet:
+    context-path: /                 # 应用根路径
+
+spring:
+  application:
+    name: 02-config                 # 应用名称（@Value("${spring.application.name}") 可读）
+
+# ========== 自定义配置（业务属性） ==========
+# 培训讲师名 + 职业，用于演示 @Value 读取自定义配置项
+moqixu:
+  name: 许莫淇
+  job: 讲师

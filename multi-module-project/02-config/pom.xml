@@ -13,20 +13,42 @@
 
     <artifactId>02-config</artifactId>
     <name>02-config</name>
-    <description>配置模块：演示配置文件管理（application.yml 自定义配置注入）</description>
+    <description>Spring Boot 配置管理：application.yml + @Value 注入 + API Fox 集成演示</description>
 
     <dependencies>
-        <!-- spring-boot-starter：提供 @Component、@ConfigurationProperties 等配置能力 -->
+        <!-- Spring Web：提供 @RestController、@Value 等（版本由父工程管理） -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- Lombok：@Data（版本由父工程管理） -->
+        <!-- Lombok：@Data 自动生成 Getter/Setter（版本由父工程管理） -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Spring Boot 打包插件：java -jar 直接运行 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

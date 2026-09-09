@@ -28,12 +28,6 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-
-        <!-- 依赖兄弟模块 02-config（演示跨模块调用 + 配置读取） -->
-        <dependency>
-            <groupId>com.itheima</groupId>
-            <artifactId>02-config</artifactId>
-        </dependency>
     </dependencies>
 
     <build>
