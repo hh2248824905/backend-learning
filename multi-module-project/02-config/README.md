@@ -30,9 +30,10 @@ server:
 spring:
   application:
     name: 02-config
-moqixu:
-  name: 许莫淇
-  job: 讲师
+app:
+  user:
+    name: a1788
+    job: 学习者
 ```
 
 ## 三、@Value 注入演示
@@ -42,8 +43,8 @@ moqixu:
 ```java
 @Value("${server.port}")                  private String serverPort;
 @Value("${spring.application.name}")      private String applicationName;
-@Value("${moqixu.name}")                  private String moqixuName;
-@Value("${moqixu.job}")                   private String moqixuJob;
+@Value("${app.user.name}")                  private String appUserName;
+@Value("${app.user.job}")                   private String appUserJob;
 ```
 
 **使用规范**：

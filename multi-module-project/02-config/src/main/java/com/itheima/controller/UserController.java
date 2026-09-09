@@ -13,7 +13,7 @@ import java.time.LocalDate;
  * 重点演示 @Value 注解从 application.yml 读取配置：
  * - 语法必须是 @Value("${属性名}")，注意 $ 符号和 {} 花括号必须齐全
  * - 注解必须用 org.springframework.beans.factory.annotation.Value（springframework 包）
- * - 可以读取内置配置（server.port、spring.application.name）和自定义配置（moqixu.*）
+ * - 可以读取内置配置（server.port、spring.application.name）和自定义配置（app.user.*）
  */
 @RestController
 public class UserController {
@@ -33,17 +33,17 @@ public class UserController {
     private String applicationName;
 
     /**
-     * 读取自定义配置 moqixu.name。
+     * 读取自定义配置 app.user.name。
      * 演示：完全自定义的属性名依然能用 @Value 注入。
      */
-    @Value("${moqixu.name}")
-    private String moqixuName;
+    @Value("${app.user.name}")
+    private String appUserName;
 
     /**
-     * 读取自定义配置 moqixu.job。
+     * 读取自定义配置 app.user.job。
      */
-    @Value("${moqixu.job}")
-    private String moqixuJob;
+    @Value("${app.user.job}")
+    private String appUserJob;
 
     /**
      * 返回 application.yml 中所有通过 @Value 注入的配置值，
@@ -53,8 +53,8 @@ public class UserController {
     public String configInfo() {
         return "server.port=" + serverPort
                 + ", spring.application.name=" + applicationName
-                + ", moqixu.name=" + moqixuName
-                + ", moqixu.job=" + moqixuJob;
+                + ", app.user.name=" + appUserName
+                + ", app.user.job=" + appUserJob;
     }
 
     /**
