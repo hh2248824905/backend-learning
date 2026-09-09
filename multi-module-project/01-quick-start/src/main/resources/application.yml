@@ -1,0 +1,15 @@
+# Spring Boot 配置文件（application.yml）
+# 用 YAML 树形结构替代 properties，减少重复前缀
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: 01-quick-start
+
+# 自定义配置（被 02-config 模块的 AppConfig 通过 @ConfigurationProperties 读取）
+app:
+  name: multi-module-project
+  version: 0.0.1-SNAPSHOT
+  description: Spring Boot 多模块项目演示

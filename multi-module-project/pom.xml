@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 继承 Spring Boot 父工程：统一管理所有 Starter 版本，子模块不用再写版本号 -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.5.16</version>
+        <relativePath/>
+    </parent>
+
+    <!-- 本工程（多模块父工程）坐标 -->
+    <groupId>com.itheima</groupId>
+    <artifactId>multi-module-project</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>multi-module-project</name>
+    <description>Spring Boot 多模块项目（父工程，仅管理子模块，无 src 目录）</description>
+
+    <!-- 统一构建标准：JDK 21 + UTF-8，所有子模块自动继承 -->
+    <properties>
+        <java.version>21</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!-- 子模块列表 -->
+    <modules>
+        <module>01-quick-start</module>
+        <module>02-config</module>
+    </modules>
+
+    <!-- 内部模块间依赖的版本统一管理（子模块引用时可不写 version） -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.itheima</groupId>
+                <artifactId>02-config</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
