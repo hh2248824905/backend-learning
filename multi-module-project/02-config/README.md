@@ -50,21 +50,27 @@ moqixu:
 - 语法必须是 `@Value("${属性名}")` —— `$` 符号和 `{}` 花括号必须齐全
 - 注解包路径必须是 `org.springframework.beans.factory.annotation.Value`（springframework 包，不是别的）
 
-## 四、API Fox 集成操作清单
+## 四、API Fox 集成操作清单（桌面客户端版）
 
-API Fox 是 SaaS 接口测试平台 + IDEA 插件。集成步骤如下（你 IDEA 装好插件后照做）：
+本机已装 Apifox 桌面客户端（`E:\apibox\Apifox\Apifox.exe`，2.8.46），跟网页版功能一致、数据互通，**全程不需要开浏览器**。
 
-### 1. 注册并创建项目
+### 1. 启动桌面客户端 + 登录
 
-1. 浏览器打开 https://apifox.com ，用微信/邮箱注册账号并登录
-2. 进入工作台，点 **新建项目** → 名称填 `02-config`（或任意）→ 类型选 **HTTP**
+1. 双击 `E:\apibox\Apifox\Apifox.exe`
+2. 首次使用点 **注册**，用手机号/微信/邮箱都行（注册一次后登录态会记住）
+3. 登录后进入工作台
 
-### 2. 生成 API 访问令牌
+### 2. 创建项目
 
-1. 进入项目 → 左侧 **项目设置** → **API 访问令牌**
-2. 点 **生成令牌** → 复制保存（只显示一次，关掉就看不到了）
+1. 工作台 → **新建项目** → 名称填 `02-config`（或任意）→ 类型选 **HTTP**
+2. 进入项目
 
-### 3. IDEA 关联 API Fox
+### 3. 生成 API 访问令牌
+
+1. 项目左侧 → **项目设置** → **API 访问令牌**
+2. 点 **生成令牌** → 复制保存（**只显示一次**，关掉就看不到了）
+
+### 4. IDEA 关联 API Fox
 
 1. 打开 IDEA → **Settings** → 搜索 `Api Box` / `Apifox Helper`（插件名）
 2. 填入：
@@ -73,24 +79,24 @@ API Fox 是 SaaS 接口测试平台 + IDEA 插件。集成步骤如下（你 IDE
    - **项目 ID**：API Fox 项目设置里能看到
 3. 点 **Test Connection** 验证连通 → 保存
 
-### 4. 同步 Controller 到 API Fox
+### 5. 同步 Controller 到 API Fox
 
 1. 打开 `UserController.java`
 2. **右键** → **Upload to Api Box**（或菜单 `ApiFox` → `Upload`）
 3. 选要同步的接口 → 确认上传
-4. 完成后会自动打开 API Fox 网页，可看到 `GET /config/info` 和 `GET /user/info` 两个接口
+4. 完成后会自动在 API Fox 桌面端打开项目，可看到 `GET /config/info` 和 `GET /user/info` 两个接口
 
-### 5. 配置测试环境
+### 6. 配置测试环境
 
-1. 在 API Fox 项目里 → **环境管理** → 新建环境
+1. API Fox 项目里 → **环境管理** → 新建环境
 2. 名称：`本地开发`（或任意）
 3. 基础 URL：`http://localhost:8888`
 4. 保存并设为 **当前环境**
 
-### 6. 启动应用 + 测试
+### 7. 启动应用 + 测试
 
-1. 启动 02-config（`java -jar ...02-config-0.0.1-SNAPSHOT.jar`）
-2. 在 API Fox 里点任一接口 → **发送** 按钮
+1. 启动 02-config（`java -jar 02-config/target/02-config-0.0.1-SNAPSHOT.jar`）
+2. 在 API Fox 桌面端点任一接口 → **发送** 按钮
 3. 应该看到 200 状态码 + 正确响应：
    - `/config/info` → `server.port=8888, ...`
    - `/user/info` → `{"id":1,"username":"张三",...}`
