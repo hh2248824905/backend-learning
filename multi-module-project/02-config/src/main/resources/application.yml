@@ -12,7 +12,7 @@ spring:
     name: 02-config                 # 应用名称（@Value("${spring.application.name}") 可读）
 
 # ========== 自定义配置（业务属性） ==========
-# 培训讲师名 + 职业，用于演示 @Value 读取自定义配置项
+# 个人信息（演示 @Value 读取自定义配置项）
 moqixu:
-  name: 许莫淇
-  job: 讲师
+  name: a1788
+  job: 学习者
