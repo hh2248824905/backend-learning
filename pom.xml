@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 父工程：只做依赖与插件的统一管理，不写业务代码 -->
+    <groupId>com.example.houduan</groupId>
+    <artifactId>houduan-parent</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>houduan-parent</name>
+    <description>后端学习仓库的 Maven 父工程</description>
+
+    <!-- 子模块 -->
+    <modules>
+        <module>hello-core</module>
+        <module>hello-app</module>
+    </modules>
+
+    <!-- 统一属性 -->
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.version>5.10.2</junit.version>
+    </properties>
+
+    <!-- 依赖版本统一管理（子模块按需引用，不写 version） -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${junit.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- 内部模块互相依赖 -->
+            <dependency>
+                <groupId>com.example.houduan</groupId>
+                <artifactId>hello-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- 插件版本统一管理 -->
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.13.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.2.5</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
