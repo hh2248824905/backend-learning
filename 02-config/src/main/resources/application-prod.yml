@@ -1,0 +1,5 @@
+# 生产环境配置（application-prod.yml）
+# 激活方式：启动参数 --spring.profiles.active=prod
+logging:
+  level:
+    root: info

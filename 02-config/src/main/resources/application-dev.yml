@@ -1,0 +1,6 @@
+# 开发环境配置（application-dev.yml）
+# 激活方式：启动参数 --spring.profiles.active=dev，或 IDEA Run Configuration 的 Active profiles 填 dev
+logging:
+  level:
+    root: debug
+    top.a1788.config: debug

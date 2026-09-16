@@ -1,7 +1,7 @@
 # 02-config 模块配置文件
 # 培训要求：配置项必须写在配置文件中，不能写在 Java 代码里
 
-# ========== 内置配置（Spring Boot 标准 key） ==========
+# ========== 内置配置（Spring Boot 标准 key，旧代码 @Value 演示依赖） ==========
 server:
   port: 8888                        # 应用启动端口（培训要求 8888，与 API Fox 环境配置一致）
   servlet:
@@ -11,9 +11,47 @@ spring:
   application:
     name: 02-config                 # 应用名称（@Value("${spring.application.name}") 可读）
 
-# ========== 自定义配置（业务属性） ==========
-# 个人信息（演示 @Value 读取自定义配置项）
+# ========== 占位符来源 ==========
+# 供下方 app.author 通过 ${mxu.name} 引用（占位符必须先定义后引用，或用默认值 ${mxu.name:匿名}）
+mxu:
+  name: a1788
+
+# ========== 案例 1: @ConfigurationProperties 类型安全绑定（嵌套对象 + List + Map + 自定义对象） ==========
+student:
+  name: 张三
+  age: 18
+  hobbies:
+    - 篮球
+    - 编程
+    - 阅读
+
+  # Map 绑定：key 随意写，value 类型由 Java Map 声明决定
+  scores:
+    chinese: 90
+    math: 95
+    english: 88
+
+  # 嵌套对象绑定
+  address:
+    province: 江苏省
+    city: 南京市
+
+  # 对象列表绑定：列表每一项都是 name/credit 结构
+  courses:
+    - name: 高等数学
+      credit: 4
+    - name: 大学英语
+      credit: 3
+
+# ========== 案例 4: @ConfigurationProperties + @Validated 配置校验 ==========
+# ========== 自定义配置（app.user 供旧代码 @Value 演示；app.name 等供 AppProperties 绑定） ==========
 app:
   user:
     name: a1788
     job: 学习者
+
+  name: 配置管理模块
+  # 占位符：引用上方 mxu.name 的值
+  author: ${mxu.name}
+  port: 8080
+  max-count: 100
