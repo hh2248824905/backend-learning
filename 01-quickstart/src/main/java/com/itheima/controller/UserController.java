@@ -10,7 +10,7 @@ import java.time.LocalDate;
  * 用户控制器，演示 RESTful 接口开发。
  * @RestController = @Controller + @ResponseBody（返回值直接序列化为 JSON）。
  *
- * 注：培训 2 之后，01-quick-start 不再依赖 02-config 模块，
+ * 注：培训 2 之后，01-quickstart 不再依赖 02-config 模块，
  * 所以删除了原 /app/info 端点和 AppConfig 注入，模块完全自包含。
  */
 @RestController

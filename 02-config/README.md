@@ -8,7 +8,7 @@
 ## 一、运行方式
 
 ```bash
-# 在 multi-module-project 根目录
+# 在 backend-learning 根目录
 ../mvnw clean package -DskipTests
 
 # 启动（监听 8888 端口，与 application.yml 配置一致）

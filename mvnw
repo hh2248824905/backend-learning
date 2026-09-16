@@ -5,8 +5,8 @@
 #   2. 全局 huaweicloud 镜像偶尔超时，本项目统一用 aliyun 镜像
 #
 # 用法（在任一 Maven 项目目录下执行）：
-#   cd multi-module-project && ../mvnw clean package
-#   ../mvnw -pl 01-quick-start -am package
+#   cd backend-learning && ../mvnw clean package
+#   ../mvnw -pl 01-quickstart -am package
 set -e
 
 # Windows 风格的 MAVEN_HOME（避免 MSYS 路径转换）

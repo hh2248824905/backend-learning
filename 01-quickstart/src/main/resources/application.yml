@@ -6,10 +6,10 @@ server:
 
 spring:
   application:
-    name: 01-quick-start
+    name: 01-quickstart
 
 # 自定义配置（被 02-config 模块的 AppConfig 通过 @ConfigurationProperties 读取）
 app:
-  name: multi-module-project
+  name: backend-learning
   version: 0.0.1-SNAPSHOT
   description: Spring Boot 多模块项目演示

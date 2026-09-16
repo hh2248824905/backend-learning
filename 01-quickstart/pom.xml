@@ -7,12 +7,12 @@
     <!-- 继承多模块父工程 -->
     <parent>
         <groupId>com.itheima</groupId>
-        <artifactId>multi-module-project</artifactId>
+        <artifactId>backend-learning</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>01-quick-start</artifactId>
-    <name>01-quick-start</name>
+    <artifactId>01-quickstart</artifactId>
+    <name>01-quickstart</name>
     <description>Spring Boot 快速入门：主应用 + User 实体 + RESTful 接口</description>
 
     <dependencies>

@@ -14,10 +14,10 @@
 
     <!-- 本工程（多模块父工程）坐标 -->
     <groupId>com.itheima</groupId>
-    <artifactId>multi-module-project</artifactId>
+    <artifactId>backend-learning</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>multi-module-project</name>
+    <name>backend-learning</name>
     <description>Spring Boot 多模块项目（父工程，仅管理子模块，无 src 目录）</description>
 
     <!-- 统一构建标准：JDK 21 + UTF-8，所有子模块自动继承 -->
@@ -28,7 +28,7 @@
 
     <!-- 子模块列表 -->
     <modules>
-        <module>01-quick-start</module>
+        <module>01-quickstart</module>
         <module>02-config</module>
     </modules>
 
