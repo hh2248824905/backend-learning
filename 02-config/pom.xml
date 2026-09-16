@@ -35,6 +35,13 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
+        <!-- OpenAPI 注解：Apifox Helper 上传时读取 @Tag/@Operation，用于生成接口分组名和文档说明 -->
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations-jakarta</artifactId>
+            <version>2.2.34</version>
+        </dependency>
+
         <!-- Spring Boot Test：@SpringBootTest + JUnit 5（仅测试期生效） -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

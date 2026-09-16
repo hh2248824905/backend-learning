@@ -1,5 +1,7 @@
 package top.a1788.config.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +17,10 @@ import top.a1788.config.service.EnvService;
  * - 散装单个值用 @Value 逐个注入（本类上半部分）
  * - 一组同前缀的配置用 @ConfigurationProperties 绑成 POJO（appProperties），
  *   所以此处用构造器注入 final 字段，而不是 @Value
+ *
+ * @Tag 的 name 会成为 Apifox 里的接口分组名（Apifox Helper 上传时读取）
  */
+@Tag(name = "配置读取控制器，演示 @Value 的四种常见形态")
 @RestController
 @RequestMapping("/config")
 @RequiredArgsConstructor
@@ -63,16 +68,19 @@ public class ConfigController {
     @Value("${env.description}")
     private String envDescription;
 
+    @Operation(summary = "基础 @Value：读取 server.port 和 spring.application.name")
     @GetMapping("/basic")
     public String getBasicInfo() {
         return "服务器端口是：" + this.serverPort + "，应用名称是：" + appName;
     }
 
+    @Operation(summary = "@Value 读取自定义配置 mxu.name / mxu.job")
     @GetMapping("/my")
     public String getMyInfo() {
         return "我的姓名是：" + this.myName + "，职业是：" + myJob;
     }
 
+    @Operation(summary = "@Value 四种形态：占位符引用、默认值、随机值、SpEL 表达式")
     @GetMapping("/value")
     public String getValueCases() {
         return "占位符引用 author=" + author
@@ -82,11 +90,13 @@ public class ConfigController {
                 + "；SpEL adult=" + adult;
     }
 
+    @Operation(summary = "多环境配置 + @Profile Bean，值随 spring.profiles.active 切换")
     @GetMapping("/env")
     public String getEnv() {
         return "当前环境：" + envName + "，" + envDescription + "；Profile Bean：" + envService.envInfo();
     }
 
+    @Operation(summary = "@ConfigurationProperties 绑定的 AppProperties（含 @Email/@Past 校验字段）")
     @GetMapping("/app")
     public AppProperties getApp() {
         return appProperties;
