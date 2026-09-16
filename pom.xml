@@ -13,7 +13,7 @@
     </parent>
 
     <!-- 本工程（多模块父工程）坐标 -->
-    <groupId>com.itheima</groupId>
+    <groupId>top.a1788</groupId>
     <artifactId>backend-learning</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -36,7 +36,7 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.itheima</groupId>
+                <groupId>top.a1788</groupId>
                 <artifactId>02-config</artifactId>
                 <version>${project.version}</version>
             </dependency>

@@ -6,7 +6,7 @@
 
     <!-- 继承多模块父工程 -->
     <parent>
-        <groupId>com.itheima</groupId>
+        <groupId>top.a1788</groupId>
         <artifactId>backend-learning</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>

@@ -1,22 +1,25 @@
-# 02-config 模块配置文件
-# 培训要求：配置项必须写在配置文件中，不能写在 Java 代码里
+# ============================================================
+# 主配置文件：所有环境共享的通用配置
+# 环境差异配置放在 application-{profile}.yml 中
+# ============================================================
 
-# ========== 内置配置（Spring Boot 标准 key，旧代码 @Value 演示依赖） ==========
 server:
-  port: 8888                        # 应用启动端口（培训要求 8888，与 API Fox 环境配置一致）
-  servlet:
-    context-path: /                 # 应用根路径
+  port: 8002
 
 spring:
   application:
-    name: 02-config                 # 应用名称（@Value("${spring.application.name}") 可读）
+    name: 02-配置管理
+  # 激活的环境（dev / prod），可通过命令行参数 --spring.profiles.active=prod 覆盖
+  profiles:
+    active: dev
 
-# ========== 占位符来源 ==========
-# 供下方 app.author 通过 ${mxu.name} 引用（占位符必须先定义后引用，或用默认值 ${mxu.name:匿名}）
+# 基础自定义配置：@Value 直接注入
+# 占位符来源：下方 app.author 通过 ${mxu.name} 引用
 mxu:
   name: a1788
+  job: 学习者
 
-# ========== 案例 1: @ConfigurationProperties 类型安全绑定（嵌套对象 + List + Map + 自定义对象） ==========
+# ========== 案例 1: @ConfigurationProperties 类型安全绑定（嵌套对象 + List + Map + List 嵌套对象） ==========
 student:
   name: 张三
   age: 18
@@ -44,14 +47,16 @@ student:
       credit: 3
 
 # ========== 案例 4: @ConfigurationProperties + @Validated 配置校验 ==========
-# ========== 自定义配置（app.user 供旧代码 @Value 演示；app.name 等供 AppProperties 绑定） ==========
 app:
-  user:
-    name: a1788
-    job: 学习者
-
   name: 配置管理模块
   # 占位符：引用上方 mxu.name 的值
   author: ${mxu.name}
-  port: 8080
+  port: 8002
   max-count: 100
+
+  # ---- 旧代码兼容块 ----
+  # com.itheima.UserController 的 @Value("${app.user.*}") 依赖，
+  # 删掉旧代码后此块可整段移除（AppProperties 会忽略未知 key，不影响绑定）
+  user:
+    name: a1788
+    job: 学习者

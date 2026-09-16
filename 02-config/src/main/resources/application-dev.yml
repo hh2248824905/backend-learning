@@ -1,6 +1,9 @@
-# 开发环境配置（application-dev.yml）
-# 激活方式：启动参数 --spring.profiles.active=dev，或 IDEA Run Configuration 的 Active profiles 填 dev
+# ============================================================
+# 开发环境配置：spring.profiles.active=dev 时生效（主配置里已默认 dev）
+# 只写环境差异项；同名 key 会覆盖主配置
+# ============================================================
 logging:
   level:
-    root: debug
+    # 开发期开自己包的 debug，方便看配置绑定和请求处理过程
     top.a1788.config: debug
+    org.springframework.web: info

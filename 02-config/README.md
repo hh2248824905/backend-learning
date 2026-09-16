@@ -11,7 +11,7 @@
 # 在 backend-learning 根目录
 ../mvnw clean package -DskipTests
 
-# 启动（监听 8888 端口，与 application.yml 配置一致）
+# 启动（监听 8002 端口，与 application.yml 配置一致）
 java -jar 02-config/target/02-config-0.0.1-SNAPSHOT.jar
 ```
 
@@ -19,14 +19,14 @@ java -jar 02-config/target/02-config-0.0.1-SNAPSHOT.jar
 
 | 端点 | 用途 | 验证内容 |
 |---|---|---|
-| http://localhost:8888/config/info | 返回 4 个 `@Value` 注入的配置值 | 配置读取是否生效 |
-| http://localhost:8888/user/info | 返回 `User` 对象 JSON | Lombok + LocalDate 封装 |
+| http://localhost:8002/config/info | 返回 4 个 `@Value` 注入的配置值 | 配置读取是否生效 |
+| http://localhost:8002/user/info | 返回 `User` 对象 JSON | Lombok + LocalDate 封装 |
 
 ## 二、application.yml 配置项
 
 ```yaml
 server:
-  port: 8888
+  port: 8002
 spring:
   application:
     name: 02-config
@@ -91,7 +91,7 @@ app:
 
 1. API Fox 项目里 → **环境管理** → 新建环境
 2. 名称：`本地开发`（或任意）
-3. 基础 URL：`http://localhost:8888`
+3. 基础 URL：`http://localhost:8002`
 4. 保存并设为 **当前环境**
 
 ### 7. 启动应用 + 测试
@@ -99,7 +99,7 @@ app:
 1. 启动 02-config（`java -jar 02-config/target/02-config-0.0.1-SNAPSHOT.jar`）
 2. 在 API Fox 桌面端点任一接口 → **发送** 按钮
 3. 应该看到 200 状态码 + 正确响应：
-   - `/config/info` → `server.port=8888, ...`
+   - `/config/info` → `server.port=8002, ...`
    - `/user/info` → `{"id":1,"username":"张三",...}`
 
 ## 五、API Fox 之外的备选测试
@@ -107,8 +107,8 @@ app:
 不安装 API Fox 也行，命令行 `curl` 效果一样：
 
 ```bash
-curl http://localhost:8888/config/info
-curl http://localhost:8888/user/info
+curl http://localhost:8002/config/info
+curl http://localhost:8002/user/info
 ```
 
 或者浏览器直接访问这两个 URL。

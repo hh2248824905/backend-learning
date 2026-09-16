@@ -1,5 +1,8 @@
-# 生产环境配置（application-prod.yml）
-# 激活方式：启动参数 --spring.profiles.active=prod
+# ============================================================
+# 生产环境配置：通过 --spring.profiles.active=prod 激活
+# 生产原则：日志收紧、不暴露调试信息
+# ============================================================
 logging:
   level:
-    root: info
+    root: warn
+    top.a1788.config: info
