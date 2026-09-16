@@ -54,6 +54,11 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <!-- 本模块有两个 @SpringBootApplication（com.itheima.Application 旧代码 /
+                         top.a1788.config.ConfigApplication 配置案例），打包时必须指定唯一主类，
+                         否则报 "Unable to find a single main class"。
+                         IDEA 里两个类依然都能单独运行，这里只决定 jar 的启动类。 -->
+                    <mainClass>top.a1788.config.ConfigApplication</mainClass>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
