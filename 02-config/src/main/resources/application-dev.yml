@@ -7,3 +7,8 @@ logging:
     # 开发期开自己包的 debug，方便看配置绑定和请求处理过程
     top.a1788.config: debug
     org.springframework.web: info
+
+# 多环境差异配置：@Value("${env.name}") / @Value("${env.description}") 读取
+env:
+  name: 开发环境
+  description: 用于开发调试，日志级别较低

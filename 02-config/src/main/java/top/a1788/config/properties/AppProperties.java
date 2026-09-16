@@ -28,11 +28,13 @@ public class AppProperties {
     /** 作者（占位符引用 yml 中 mxu.name 的值） */
     private String author;
 
-    /** 端口（不能小于 1024，避免占用系统端口） */
-    @Min(value = 1024, message = "app.port 不能小于 1024")
+    /** 端口（合法端口范围 1~65535） */
+    @Min(value = 1, message = "app.port 必须大于等于 1")
+    @Max(value = 65535, message = "app.port 必须小于等于 65535")
     private Integer port;
 
-    /** 最大数量（不能超过 1000；yml 中为 max-count，松散绑定自动映射） */
+    /** 最大数量（yml 中为 max-count，松散绑定自动映射为 maxCount） */
+    @Min(value = 1, message = "app.max-count 必须大于等于 1")
     @Max(value = 1000, message = "app.max-count 不能超过 1000")
     private Integer maxCount;
 }

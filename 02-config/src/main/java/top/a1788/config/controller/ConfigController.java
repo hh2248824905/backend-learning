@@ -1,65 +1,94 @@
 package top.a1788.config.controller;
 
-import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.a1788.config.properties.AppProperties;
-import top.a1788.config.properties.StudentProperties;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
+import top.a1788.config.service.EnvService;
 
 /**
- * 配置读取控制器：把 @ConfigurationProperties 绑定好的 Bean 直接以 JSON 返回，
- * 用于在 Apifox 中同步接口并肉眼验证配置绑定结果。
+ * 配置管理案例：@Value、占位符、随机值、SpEL、多环境、@Profile、配置校验
  *
- * 注意对比：这里注入的是 POJO（StudentProperties），
- * 一次拿到全部字段；用 @Value 则每个字段都得写一个 ${} 注解。
+ * 注意两种注入风格的对比：
+ * - 散装单个值用 @Value 逐个注入（本类上半部分）
+ * - 一组同前缀的配置用 @ConfigurationProperties 绑成 POJO（appProperties），
+ *   所以此处用构造器注入 final 字段，而不是 @Value
  */
 @RestController
 @RequestMapping("/config")
+@RequiredArgsConstructor
 public class ConfigController {
 
-    @Resource
-    private StudentProperties studentProperties;
+    private final AppProperties appProperties;
+    private final EnvService envService;
 
-    @Resource
-    private AppProperties appProperties;
+    // ---------- 基础 @Value 注入 ----------
+    @Value("${server.port}")
+    private Integer serverPort;
 
-    /**
-     * GET /config/student
-     * 返回 student 前缀下的完整配置（简单字段 + List + Map + 嵌套对象 + 对象列表）。
-     */
-    @GetMapping("/student")
-    public StudentProperties student() {
-        return studentProperties;
+    @Value("${spring.application.name}")
+    private String appName;
+
+    @Value("${mxu.name}")
+    private String myName;
+
+    @Value("${mxu.job}")
+    private String myJob;
+
+    // ---------- 占位符引用：app.author 在 yml 中引用了 mxu.name ----------
+    @Value("${app.author}")
+    private String author;
+
+    // ---------- 默认值：app.remark 未配置时使用冒号后的默认值 ----------
+    @Value("${app.remark:暂无备注}")
+    private String remark;
+
+    // ---------- 随机值 ----------
+    @Value("${random.uuid}")
+    private String randomUuid;
+
+    @Value("${random.int(1,100)}")
+    private Integer randomInt;
+
+    // ---------- SpEL 表达式：先解析 ${student.age} 再计算三元表达式 ----------
+    @Value("#{${student.age} >= 18 ? '成年' : '未成年'}")
+    private String adult;
+
+    // ---------- 多环境配置：值来自 application-{profile}.yml ----------
+    @Value("${env.name}")
+    private String envName;
+
+    @Value("${env.description}")
+    private String envDescription;
+
+    @GetMapping("/basic")
+    public String getBasicInfo() {
+        return "服务器端口是：" + this.serverPort + "，应用名称是：" + appName;
     }
 
-    /**
-     * GET /config/app
-     * 返回 app 前缀下的配置（含占位符注入的 author 与 @Validated 校验通过的 port/maxCount）。
-     */
+    @GetMapping("/my")
+    public String getMyInfo() {
+        return "我的姓名是：" + this.myName + "，职业是：" + myJob;
+    }
+
+    @GetMapping("/value")
+    public String getValueCases() {
+        return "占位符引用 author=" + author
+                + "；默认值 remark=" + remark
+                + "；随机 UUID=" + randomUuid
+                + "；随机整数=" + randomInt
+                + "；SpEL adult=" + adult;
+    }
+
+    @GetMapping("/env")
+    public String getEnv() {
+        return "当前环境：" + envName + "，" + envDescription + "；Profile Bean：" + envService.envInfo();
+    }
+
     @GetMapping("/app")
-    public AppProperties app() {
+    public AppProperties getApp() {
         return appProperties;
-    }
-
-    /**
-     * GET /config/summary
-     * 汇总常用字段，方便在 Apifox 里直接看关键值，不用翻嵌套结构。
-     */
-    @GetMapping("/summary")
-    public Map<String, Object> summary() {
-        Map<String, Object> result = new LinkedHashMap<>();
-        result.put("学生姓名", studentProperties.getName());
-        result.put("学生年龄", studentProperties.getAge());
-        result.put("爱好数量", studentProperties.getHobbies().size());
-        result.put("语文成绩", studentProperties.getScores().get("chinese"));
-        result.put("所在城市", studentProperties.getAddress().getCity());
-        result.put("课程数量", studentProperties.getCourses().size());
-        result.put("应用名称", appProperties.getName());
-        result.put("作者", appProperties.getAuthor());
-        return result;
     }
 }

@@ -6,3 +6,8 @@ logging:
   level:
     root: warn
     top.a1788.config: info
+
+# 多环境差异配置：--spring.profiles.active=prod 时被读取
+env:
+  name: 生产环境
+  description: 面向真实用户，日志级别收紧
