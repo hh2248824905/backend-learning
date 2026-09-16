@@ -22,7 +22,7 @@
 
     <!-- 统一构建标准：JDK 21 + UTF-8，所有子模块自动继承 -->
     <properties>
-        <java.version>21</java.version>
+        <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
