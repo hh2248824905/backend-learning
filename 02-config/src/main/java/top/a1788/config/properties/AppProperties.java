@@ -1,12 +1,16 @@
 package top.a1788.config.properties;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
+
+import java.time.LocalDate;
 
 /**
  * 应用配置属性类（案例 4：@ConfigurationProperties + @Validated 配置校验）。
@@ -37,4 +41,13 @@ public class AppProperties {
     @Min(value = 1, message = "app.max-count 必须大于等于 1")
     @Max(value = 1000, message = "app.max-count 不能超过 1000")
     private Integer maxCount;
+
+    /** 联系邮箱（@Email 校验格式，@NotBlank 保证非空） */
+    @NotBlank(message = "app.email 不能为空")
+    @Email(message = "app.email 邮箱格式不正确")
+    private String email;
+
+    /** 创建日期（@Past 只能是过去的日期；yml 写 2024-09-01 即可绑定 LocalDate） */
+    @Past(message = "app.create-date 必须是过去的日期")
+    private LocalDate createDate;
 }

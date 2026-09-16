@@ -54,6 +54,10 @@ app:
   port: 8002
   max-count: 100
 
+  # ---- 注解校验扩展属性（@Email + @Past）----
+  email: a1788@example.com
+  create-date: 2024-09-01
+
   # ---- 旧代码兼容块 ----
   # com.itheima.UserController 的 @Value("${app.user.*}") 依赖，
   # 删掉旧代码后此块可整段移除（AppProperties 会忽略未知 key，不影响绑定）
