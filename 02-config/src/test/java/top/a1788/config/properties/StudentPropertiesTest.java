@@ -18,12 +18,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 public class StudentPropertiesTest {
 
-    /**
-     * 注入配置属性 Bean。
-     * 视频中报 "No bean of type 'StudentProperties' available" 的原因：
-     * StudentProperties 上缺少 @Component（或未用 @EnableConfigurationProperties 注册），
-     * 容器里根本没有这个 Bean，注入失败。
-     */
     @Resource
     private StudentProperties studentProperties;
 
