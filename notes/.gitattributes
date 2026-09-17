@@ -1,0 +1,8 @@
+# 统一换行符：仓库内存 LF，检出时按系统转换
+* text=auto eol=lf
+
+# 明确二进制文件，禁止换行转换
+*.png binary
+*.jpg binary
+*.ico binary
+*.woff2 binary
